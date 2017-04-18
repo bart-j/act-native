@@ -10,3 +10,17 @@ body {
 .extra-margin-top {
     margin-top: 40px;
 }
+
+.avatar {
+    text-align: center;
+}
+
+.avatar__image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.avatar__info {
+    margin-top: 10px;
+}
