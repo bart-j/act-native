@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">Één taal voor regelmakers en programmeurs</h1>
+    <p>De wereld verandert continu. Daarmee verandert ook de wetgeving sneller dan ooit. Het is voor overheidsorganisaties een grote uitdaging om de verandering van wetgeving te automatiseren. Act Native heeft een gestructureerde taal ontwikkeld die specifiek genoeg is zodat een computer hem begrijpt en menselijk genoeg is zodat een mens hem begrijpt. Hiermee wordt het automatiseren van wetgeving veel eenvoudiger.</p>
+    <p><a class="btn btn-primary btn-lg" href="/more-info.html" role="button">Vertel me meer &raquo;</a></p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+        <h2></h2>
+        <div class="code-block">
+            <pre>
+Maak een score met de volgende parameters:
+- score is HOOG
+
+indien aan de volgende voorwaarden wordt voldaan:
+- <i>de aangifte</i> heeft rubriek <b>bestemming</b> is gelijk aan "<select name="country" id="country"><option>FRANKRIJK</option><option>DUITSLAND</option><option>NEDERLAND</option></select>"
+- <i>de aangifte</i> heeft rubriek <b>omschrijving</b> <select name="select" name="rule_counts_is"><option>bevat</option><option>is gelijk aan</option></select> "<input type="text" name="rule_description" value="BOM">"
+
+Maak een score met de volgende parameters:
+- score is LAAG
+
+indien aan de volgende voorwaarden wordt voldaan:
+- <i>de aangifte</i> heeft rubriek <b>bestemming</b> is niet gelijk aan "EGYPTE"
+- <i>de aangifte</i> heeft rubriek <b>omschrijving</b> bevat niet "BOM"
+        </pre>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h2>Een eenvoudig voorbeeld</h2>
+        <p>Hier zie je een eenvoudig voorbeeld van onze taal. Je kunt zowel de regels in de taal aanpassen als de gevallen. Probeer het maar eens uit!</p>
+        <form method="POST">
+            <fieldset>
+                <div class="form-group">
+                    <label>Bestemming</label>
+                    <select name="country" id="country" class="form-control">
+                        <option>Frankrijk</option>
+                        <option>Nederland</option>
+                        <option>Duitsland</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Omschrijving</label>
+                    <input type="text" id="description" name="description" autofocus class="form-control" placeholder="Bijvoorbeeld BOM of BOMMETJE....">
+                </div>
+
+                <button type="submit" class="btn btn-secondary" href="#" role="button">Beslis</button>
+            </fieldset>
+        </form>
+        </p>
+   </div>
+  </div>
+
+<div class="container extra-margin-top">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Aanpasbaar</h2>
+      <p>Omdat de taal door een grote groep gebruikers zijn. </p>
+   </div>
+
+    <div class="col-md-4">
+      <h2>Controleerbaar</h2>
+      <p>De gestructureerde taal is voor zowel programmeurs als regelmakers begrijpbaar en controleerbaar.</p>
+   </div>
+
+    <div class="col-md-4">
+      <h2>Herleidbaar</h2>
+      <p>Het is per beslissing eenvoudig na te gaan welke regels eraan ten grondslag liggen. Wanneer regels veranderen, is het ook mogelijk om te zien wat er veranderd is en welke invloed dit op beslissingen heeft.</p>
+   </div>
+
+  </div>
+</div>
+{% endblock %}

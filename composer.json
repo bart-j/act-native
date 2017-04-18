@@ -1,0 +1,13 @@
+{
+    "name": "bartj/act-native",
+    "require": {
+        "slim/slim": "^3.8",
+        "slim/twig-view": "^2.2"
+    },
+    "authors": [
+        {
+            "name": "bart-j",
+            "email": "bart@jeukendrup.nl"
+        }
+    ]
+}

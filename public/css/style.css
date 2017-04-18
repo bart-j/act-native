@@ -1,0 +1,12 @@
+body {
+  padding-top: 2rem;
+}
+
+.code-block {
+    border: 1px solid #ddd;
+    padding: 39px 14px 14px;
+}
+
+.extra-margin-top {
+    margin-top: 40px;
+}
