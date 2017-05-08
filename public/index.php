@@ -21,6 +21,43 @@ $app->get("/", function (Request $request, Response $response) {
     return $this->view->render($response, "index.html");
 });
 
+$app->post("/", function (Request $request, Response $response) {
+    $input = $request->getParsedBody();
+    
+    if (!in_array($input["rule_country"], ["FRANKRIJK", "DUITSLAND", "NEDERLAND"])) {
+        throw new Exception("Invalid input.");
+    }
+
+    if (!in_array($input["rule_comparator"], ["bevat", "bevat niet", "is gelijk aan", "is niet gelijk aan"])) {
+        throw new Exception("Invalid input.");
+    }
+
+    $input["rule_description"] = str_replace("\"", "", $input["rule_description"]);
+
+    if (!in_array($input["instance_country"], ["FRANKRIJK", "NEDERLAND", "DUITSLAND"])) {
+        throw new Exception("Invalid input.");
+    }
+
+    $input["instance_description"] = str_replace("\"", "", $input["instance_description"]);
+
+    $rule = "Maak een score met de volgende parameters:
+    - score is HOOG
+    indien aan de volgende voorwaarden wordt voldaan:
+    - de aangifte heeft rubriek bestemming is gelijk aan \"" . $input["rule_country"] . "\"
+    - de aangifte heeft rubriek omschrijving " . $input["rule_comparator"] . " \"" . $input["rule_description"] . "\".";
+
+    $rule = escapeshellarg($rule);
+    $instance_country = escapeshellarg($input["instance_country"]);
+    $instance_description = escapeshellarg($input["instance_description"]);
+
+    $result = exec("/app/backend/execute.sh $rule $instance_country $instance_description");
+
+    return $this->view->render($response, "index.html", [
+        "result" => $result,
+        "input" => $input
+    ]);
+});
+
 $app->get("/meer-info", function (Request $request, Response $response) {
     return $this->view->render($response, "meer-info.html");
 });

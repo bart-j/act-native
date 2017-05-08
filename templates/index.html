@@ -10,52 +10,62 @@
 </div>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-8">
-        <h2></h2>
-        <div class="code-block">
-            <pre>
-Maak een score met de volgende parameters:
-- score is HOOG
+  <form id="example" method="POST">
+    <div class="row">
+      <div class="col-md-8">
+          <h2></h2>
+          <div class="code-block">
+              <pre>
+  Maak een score met de volgende parameters:
+  - score is HOOG
 
-indien aan de volgende voorwaarden wordt voldaan:
-- <i>de aangifte</i> heeft rubriek <b>bestemming</b> is gelijk aan "<select name="country" id="country"><option>FRANKRIJK</option><option>DUITSLAND</option><option>NEDERLAND</option></select>"
-- <i>de aangifte</i> heeft rubriek <b>omschrijving</b> <select name="select" name="rule_counts_is"><option>bevat</option><option>is gelijk aan</option></select> "<input type="text" name="rule_description" value="BOM">"
+  indien aan alle voorwaarden wordt voldaan:
+  - <i>de aangifte</i> heeft rubriek <b>bestemming</b> is gelijk aan "<select name="rule_country" id="country">
+    <option {% if input["rule_country"] == "FRANKRIJK" %}selected="selected"{% endif %}>FRANKRIJK</option>
+    <option {% if input["rule_country"] == "DUITSLAND" %}selected="selected"{% endif %}>DUITSLAND</option>
+    <option {% if input["rule_country"] == "NEDERLAND" %}selected="selected"{% endif %}>NEDERLAND</option>
+  </select>"
+  - <i>de aangifte</i> heeft rubriek <b>omschrijving</b> <select name="rule_comparator">
+    <option {% if input["rule_comparator"] == "is gelijk aan" %}selected="selected"{% endif %}>is gelijk aan</option>
+    <option {% if input["rule_comparator"] == "is niet gelijk aan" %}selected="selected"{% endif %}>is niet gelijk aan</option>
+    <option {% if input["rule_comparator"] == "bevat" %}selected="selected"{% endif %}>bevat</option>
+    <option {% if input["rule_comparator"] == "bevat niet" %}selected="selected"{% endif %}>bevat niet</option>
+  </select> "<input type="text" name="rule_description" value="BOM">".
+          </pre>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <h3>Een eenvoudig voorbeeld</h3>
+          <p>Hier zie je een eenvoudig voorbeeld van onze taal. Je kunt zowel de regels in de taal aanpassen als de gevallen. Probeer het maar eens uit!</p>
+              <fieldset>
+                  <div class="form-group">
+                      <label>Bestemming</label>
+                      <select name="instance_country" id="country" class="form-control">
+                          <option {% if input["instance_country"] == "FRANKRIJK" %}selected="selected"{% endif %}>FRANKRIJK</option>
+                          <option {% if input["instance_country"] == "NEDERLAND" %}selected="selected"{% endif %}>NEDERLAND</option>
+                          <option {% if input["instance_country"] == "DUITSLAND" %}selected="selected"{% endif %}>DUITSLAND</option>
+                      </select>
+                  </div>
 
-Maak een score met de volgende parameters:
-- score is LAAG
+                  <div class="form-group">
+                      <label>Omschrijving</label>
+                      <input type="text" id="description" name="instance_description" class="form-control" placeholder="Bijvoorbeeld BOM of BOMMETJE...." value="{{ input["instance_description"] }}">
+                  </div>
 
-indien aan de volgende voorwaarden wordt voldaan:
-- <i>de aangifte</i> heeft rubriek <b>bestemming</b> is niet gelijk aan "EGYPTE"
-- <i>de aangifte</i> heeft rubriek <b>omschrijving</b> bevat niet "BOM"
-        </pre>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <h3>Een eenvoudig voorbeeld</h3>
-        <p>Hier zie je een eenvoudig voorbeeld van onze taal. Je kunt zowel de regels in de taal aanpassen als de gevallen. Probeer het maar eens uit!</p>
-        <form method="POST">
-            <fieldset>
-                <div class="form-group">
-                    <label>Bestemming</label>
-                    <select name="country" id="country" class="form-control">
-                        <option>Frankrijk</option>
-                        <option>Nederland</option>
-                        <option>Duitsland</option>
-                    </select>
-                </div>
+                  <div id="submit">
+                    <button type="submit" class="btn btn-secondary" href="#" role="button">Beslis</button>
+                    {% if result %}
+                      <font color="red">{{ result }}</font>
+                    {% endif %}
+                  </div>
 
-                <div class="form-group">
-                    <label>Omschrijving</label>
-                    <input type="text" id="description" name="description" class="form-control" placeholder="Bijvoorbeeld BOM of BOMMETJE....">
-                </div>
-
-                <button type="submit" class="btn btn-secondary" href="#" role="button">Beslis</button>
-            </fieldset>
-        </form>
-        </p>
-   </div>
+                  <div id="spinner" style="display:none;"><img id="spinner" src="/img/spinner.gif" border=0></div>
+              </fieldset>
+          </p>
+     </div>
   </div>
+  </form>
+</div>
 
 <div class="container extra-margin-top">
   <div class="row">

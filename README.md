@@ -15,3 +15,11 @@ Also configure a new vhost in your webserver
 
 ## Run the environment
 Point your browser to http://act-native.dev:8000
+
+## Build a new Docker container
+
+    docker build -t bartj/act-native .
+
+## Run the Docker container
+
+    docker run -p 80:80 bartj/act-native
