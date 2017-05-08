@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     libapache2-mod-php \
     default-jre \
     composer \
-    unzip
+    unzip \
 && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /app
@@ -19,3 +19,8 @@ RUN cd /app && \
 RUN cp /app/docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
 
+RUN cp /app/docker/run.sh /run.sh
+
+EXPOSE 80
+
+ENTRYPOINT ["/run.sh"]
