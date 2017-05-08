@@ -21,15 +21,15 @@
 
   indien aan alle voorwaarden wordt voldaan:
   - <i>de aangifte</i> heeft rubriek <b>bestemming</b> is gelijk aan "<select name="rule_country" id="country">
-    <option {% if input["rule_country"] == "FRANKRIJK" %}selected="selected"{% endif %}>FRANKRIJK</option>
-    <option {% if input["rule_country"] == "DUITSLAND" %}selected="selected"{% endif %}>DUITSLAND</option>
-    <option {% if input["rule_country"] == "NEDERLAND" %}selected="selected"{% endif %}>NEDERLAND</option>
+    <option>FRANKRIJK</option>
+    <option>DUITSLAND</option>
+    <option>NEDERLAND</option>
   </select>"
   - <i>de aangifte</i> heeft rubriek <b>omschrijving</b> <select name="rule_comparator">
-    <option {% if input["rule_comparator"] == "is gelijk aan" %}selected="selected"{% endif %}>is gelijk aan</option>
-    <option {% if input["rule_comparator"] == "is niet gelijk aan" %}selected="selected"{% endif %}>is niet gelijk aan</option>
-    <option {% if input["rule_comparator"] == "bevat" %}selected="selected"{% endif %}>bevat</option>
-    <option {% if input["rule_comparator"] == "bevat niet" %}selected="selected"{% endif %}>bevat niet</option>
+    <option>is gelijk aan</option>
+    <option>is niet gelijk aan</option>
+    <option>bevat</option>
+    <option>bevat niet</option>
   </select> "<input type="text" name="rule_description" value="BOM">".
           </pre>
           </div>
@@ -41,25 +41,23 @@
                   <div class="form-group">
                       <label>Bestemming</label>
                       <select name="instance_country" id="country" class="form-control">
-                          <option {% if input["instance_country"] == "FRANKRIJK" %}selected="selected"{% endif %}>FRANKRIJK</option>
-                          <option {% if input["instance_country"] == "NEDERLAND" %}selected="selected"{% endif %}>NEDERLAND</option>
-                          <option {% if input["instance_country"] == "DUITSLAND" %}selected="selected"{% endif %}>DUITSLAND</option>
+                          <option>FRANKRIJK</option>
+                          <option>NEDERLAND</option>
+                          <option>DUITSLAND</option>
                       </select>
                   </div>
 
                   <div class="form-group">
                       <label>Omschrijving</label>
-                      <input type="text" id="description" name="instance_description" class="form-control" placeholder="Bijvoorbeeld BOM of BOMMETJE...." value="{{ input["instance_description"] }}">
+                      <input type="text" id="description" name="instance_description" class="form-control" placeholder="Bijvoorbeeld BOM of BOMMETJE...." value="">
                   </div>
 
                   <div id="submit">
                     <button type="submit" class="btn btn-secondary" href="#" role="button">Beslis</button>
-                    {% if result %}
-                      <font color="red">{{ result }}</font>
-                    {% endif %}
                   </div>
 
                   <div id="spinner" style="display:none;"><img id="spinner" src="/img/spinner.gif" border=0></div>
+                  <div id="result"></div>
               </fieldset>
           </p>
      </div>

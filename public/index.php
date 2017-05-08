@@ -21,7 +21,7 @@ $app->get("/", function (Request $request, Response $response) {
     return $this->view->render($response, "index.html");
 });
 
-$app->post("/", function (Request $request, Response $response) {
+$app->post("/decide", function (Request $request, Response $response) {
     $input = $request->getParsedBody();
     
     if (!in_array($input["rule_country"], ["FRANKRIJK", "DUITSLAND", "NEDERLAND"])) {
@@ -33,12 +33,14 @@ $app->post("/", function (Request $request, Response $response) {
     }
 
     $input["rule_description"] = str_replace("\"", "", $input["rule_description"]);
+    $input["rule_description"] = str_replace("'", "", $input["rule_description"]);
 
     if (!in_array($input["instance_country"], ["FRANKRIJK", "NEDERLAND", "DUITSLAND"])) {
         throw new Exception("Invalid input.");
     }
 
     $input["instance_description"] = str_replace("\"", "", $input["instance_description"]);
+    $input["instance_description"] = str_replace("'", "", $input["instance_description"]);
 
     $rule = "Maak een score met de volgende parameters:
     - score is HOOG
@@ -50,11 +52,8 @@ $app->post("/", function (Request $request, Response $response) {
     $instance_country = escapeshellarg($input["instance_country"]);
     $instance_description = escapeshellarg($input["instance_description"]);
 
-    $result = exec("/app/backend/execute.sh $rule $instance_country $instance_description");
-
-    return $this->view->render($response, "index.html", [
-        "result" => $result,
-        "input" => $input
+    return $response->withJson([
+        "result" => exec("/app/backend/execute.sh $rule $instance_country $instance_description")
     ]);
 });
 

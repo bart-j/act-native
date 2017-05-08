@@ -25,3 +25,7 @@ body {
 .avatar__info {
     margin-top: 10px;
 }
+
+#result {
+    color: red;
+}
