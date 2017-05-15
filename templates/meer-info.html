@@ -1,9 +1,31 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <div class="jumbotron">
-    <div class="container">
-      <h2>Meer info</h2>
+    <div class="jumbotron">
+        <div class="container">
+            <h2>Meer info</h2>
+        </div>
     </div>
-  </div>
+
+    <div class="container">
+        <h3>Over de taal</h3>
+        <p>Het omzetten van de natuurlijke taal naar door de computer uitvoerbare code heeft drie stappen:
+            <ol>
+                <li>In deze stap specificeert de regelmaker zijn regels in de gecontroleerde natuurlijke taal</li>
+                <li>De gecontroleerde gestructureerde taal wordt omgezet naar een tussentaal die speciaal ontworpen is voor regelgebaseerd werken. We hebben gekozen voor de <a href="https://docs.jboss.org/drools/release/5.2.0.Final/drools-expert-docs/html/ch05.html">Drools Rule Language (DRL)</a></li>
+                <li>We gebruiken de <a href="https://docs.jboss.org/drools/release/6.2.0.Final/drools-docs/html/ch19.html">KIE execution server</a> van Drools om de DRL op de computer uitvoerbaar te maken op de <a href="https://nl.wikipedia.org/wiki/Java_Virtual_Machine">Java Virtual Machine (JVM)</a>.</li>
+            </ol>
+        </p>
+    </div>
+
+    <div class="container">
+        <h3>Het ecosysteem</h3>
+        <p>Act native is slechts een bouwblok binnen een ecosysteem. Simpelgezegd kan de Act Native bouwsteen op basis van een set aan regels voor een specifiek geval een beslissing nemen. De bouwsteen accepteert een set en regels en een instantie (de data waarop de beslissing genomen moet worden).</p>
+    </div>
+
+    <div class="container">
+        <h3>Open source</h3>
+        <p>Act Native is gebouwd op basis van open source componenten. Dit betekent overigens <u>niet</u> dat de broncode en de data in de systemen open zijn.</p>
+    </div>
+
 {% endblock %}
