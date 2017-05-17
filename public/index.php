@@ -18,42 +18,29 @@ $container["view"] = function ($container) {
 };
 
 $app->get("/", function (Request $request, Response $response) {
-    return $this->view->render($response, "index.html");
+    return $this->view->render($response, "index.html", [
+        "rules" => file_get_contents("../backend/data/ProfielSpraak.txt")
+    ]);
 });
 
 $app->post("/decide", function (Request $request, Response $response) {
     $input = $request->getParsedBody();
     
-    if (!in_array($input["rule_country"], ["FRANKRIJK", "DUITSLAND", "NEDERLAND"])) {
+    $input["description"] = ucwords($input["description"]);
+    $input["description"] = str_replace("\"", "", $input["description"]);
+    $input["description"] = str_replace("'", "", $input["description"]);
+
+    if (!in_array($input["country"], ["Taiwan", "China", "India", "Nederland"])) {
         throw new Exception("Invalid input.");
     }
 
-    if (!in_array($input["rule_comparator"], ["bevat", "bevat niet", "is gelijk aan", "is niet gelijk aan"])) {
-        throw new Exception("Invalid input.");
-    }
+    $description = escapeshellarg($input["description"]);
+    $country = escapeshellarg($input["country"]);
 
-    $input["rule_description"] = str_replace("\"", "", $input["rule_description"]);
-    $input["rule_description"] = str_replace("'", "", $input["rule_description"]);
-
-    if (!in_array($input["instance_country"], ["FRANKRIJK", "NEDERLAND", "DUITSLAND"])) {
-        throw new Exception("Invalid input.");
-    }
-
-    $input["instance_description"] = str_replace("\"", "", $input["instance_description"]);
-    $input["instance_description"] = str_replace("'", "", $input["instance_description"]);
-
-    $rule = "Maak een score met de volgende parameters:
-    - score is HOOG
-    indien aan de volgende voorwaarden wordt voldaan:
-    - de aangifte heeft rubriek bestemming is gelijk aan \"" . $input["rule_country"] . "\"
-    - de aangifte heeft rubriek omschrijving " . $input["rule_comparator"] . " \"" . $input["rule_description"] . "\".";
-
-    $rule = escapeshellarg($rule);
-    $instance_country = escapeshellarg($input["instance_country"]);
-    $instance_description = escapeshellarg($input["instance_description"]);
+    exec("/app/backend/execute.sh $description $country", $result);
 
     return $response->withJson([
-        "result" => exec("/app/backend/execute.sh $rule $instance_country $instance_description")
+        "result" => implode("<br />", array_slice($result, -3))
     ]);
 });
 

@@ -1,0 +1,9 @@
+/app/backend/src/main/java/com/fokkenrood/antlr/Interpreteer.java
+/app/backend/src/main/java/com/fokkenrood/antlr/ProfielSpraakParser.java
+/app/backend/src/main/java/com/fokkenrood/drools/Aangifte.java
+/app/backend/src/main/java/com/fokkenrood/antlr/Antlr4.java
+/app/backend/src/main/java/com/fokkenrood/antlr/AangifteDroolsListener.java
+/app/backend/src/main/java/com/fokkenrood/antlr/ProfielSpraakBaseListener.java
+/app/backend/src/main/java/com/fokkenrood/antlr/AangifteErrorListener.java
+/app/backend/src/main/java/com/fokkenrood/antlr/ProfielSpraakLexer.java
+/app/backend/src/main/java/com/fokkenrood/antlr/ProfielSpraakListener.java

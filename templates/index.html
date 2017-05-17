@@ -14,42 +14,25 @@
     <div class="row">
       <div class="col-md-8">
           <h2></h2>
-          <div class="code-block">
-              <pre>
-  Maak een score met de volgende parameters:
-  - score is HOOG
-
-  indien aan alle voorwaarden wordt voldaan:
-  - <i>de aangifte</i> heeft rubriek <b>bestemming</b> is gelijk aan "<select name="rule_country" id="country">
-    <option>FRANKRIJK</option>
-    <option>DUITSLAND</option>
-    <option>NEDERLAND</option>
-  </select>"
-  - <i>de aangifte</i> heeft rubriek <b>omschrijving</b> <select name="rule_comparator">
-    <option>is gelijk aan</option>
-    <option>is niet gelijk aan</option>
-    <option>bevat</option>
-    <option>bevat niet</option>
-  </select> "<input type="text" name="rule_description" value="BOM">".
-          </pre>
-          </div>
+          <div class="code-block"><pre>{{ rules }}</pre></div>
       </div>
       <div class="col-md-4">
-          <h3>Een eenvoudig voorbeeld</h3>
-          <p>Hier zie je een eenvoudig voorbeeld van onze taal. Je kunt zowel de regels in de taal aanpassen als de gevallen. Probeer het maar eens uit!</p>
+          <h3>Een voorbeeld</h3>
+          <p>Hier zie je een voorbeeld van onze taal. Je kunt hieronder uitproberen welke beslissing het systeem neemt voor een bepaalde invoer. Probeer het maar eens uit!</p>
               <fieldset>
                   <div class="form-group">
-                      <label>Bestemming</label>
-                      <select name="instance_country" id="country" class="form-control">
-                          <option>FRANKRIJK</option>
-                          <option>NEDERLAND</option>
-                          <option>DUITSLAND</option>
-                      </select>
+                      <label for="description">Goederen omschrijving</label>
+                      <input type="text" id="description" name="description" class="form-control" placeholder="Fiets, fietsbroek of kippenvlees..." value="">
                   </div>
 
                   <div class="form-group">
-                      <label>Omschrijving</label>
-                      <input type="text" id="description" name="instance_description" class="form-control" placeholder="Bijvoorbeeld BOM of BOMMETJE...." value="">
+                      <label for="country">Land van herkomst</label>
+                      <select name="country" id="country" class="form-control">
+                          <option>Taiwan</option>
+                          <option>China</option>
+                          <option>India</option>
+                          <option>Nederland</option>
+                      </select>
                   </div>
 
                   <div id="submit">

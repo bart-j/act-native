@@ -7,7 +7,7 @@ $(document).ready(function() {
         $("#spinner").show();
 
         $.post("/decide", $(this).serialize(), function(data) {
-            $("#result").text(data.result);
+            $("#result").html(data.result);
 
             $("#submit").show();
             $("#spinner").hide();

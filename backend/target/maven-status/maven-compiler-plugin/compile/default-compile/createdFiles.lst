@@ -1,0 +1,16 @@
+com/fokkenrood/antlr/ProfielSpraakParser$ObjectContext.class
+com/fokkenrood/antlr/ProfielSpraakListener.class
+com/fokkenrood/antlr/ProfielSpraakParser$StatementsContext.class
+com/fokkenrood/drools/Aangifte.class
+com/fokkenrood/antlr/ProfielSpraakParser$WaardeContext.class
+com/fokkenrood/antlr/ProfielSpraakBaseListener.class
+com/fokkenrood/antlr/ProfielSpraakParser$ToekenningContext.class
+com/fokkenrood/antlr/ProfielSpraakParser$FeitContext.class
+com/fokkenrood/antlr/ProfielSpraakParser$VergelijkingContext.class
+com/fokkenrood/antlr/ProfielSpraakLexer.class
+com/fokkenrood/antlr/ProfielSpraakParser$RegelContext.class
+com/fokkenrood/antlr/Interpreteer.class
+com/fokkenrood/antlr/ProfielSpraakParser.class
+com/fokkenrood/antlr/AangifteDroolsListener.class
+com/fokkenrood/antlr/Antlr4.class
+com/fokkenrood/antlr/AangifteErrorListener.class
