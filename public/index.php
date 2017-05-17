@@ -8,12 +8,21 @@ $config["displayErrorDetails"] = true;
 
 $app = new \Slim\App(["settings" => $config]);
 
+$menu = [
+    ["url" => "/", "title" => "Home"],
+    ["url" => "/meer-info", "title" => "Meer info"],
+    ["url" => "/over-ons", "title" => "Over ons"],
+    ["url" => "/contact", "title" => "Contact"]
+];
+
 $container = $app->getContainer();
 
-$container["view"] = function ($container) {
+$container["view"] = function ($container) use ($menu) {
     $view = new \Slim\Views\Twig("../templates");
     $basePath = rtrim(str_ireplace("index.php", "", $container["request"]->getUri()->getBasePath()), "/");
     $view->addExtension(new Slim\Views\TwigExtension($container["router"], $basePath));
+    $view->getEnvironment()->addGlobal("current_path", $container["request"]->getUri()->getPath());
+    $view->getEnvironment()->addGlobal("menu", $menu);
     return $view;
 };
 
