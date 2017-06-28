@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="jumbotron">
+      <div class="container">
+        <h2>Een nieuwe regel bouwen</h2>
+      </div>
+    </div>
+    
+    <div class="container">
+		<div id="editor">/* ProfielSpraak */
+		Regel "FOUTJE" luidt:
+		
+		Het percentage invoerrecht wordt gesteld op 50
+			en de factuurwaarde wordt gesteld op 1500
+			en het bedrag aan invoerrecht wordt gerekend als de factuurwaarde maal het percentage invoerrecht
+			en het certificaat wordt gesteld op "geen"
+			
+		indien aan de volgende voorwaarden wordt voldaan:
+			- goederen omschrijving is gelijk aan "Fiets"
+			- land van herkomst is gelijk aan "Taiwan"
+			.
+		</div>
+    </div>
+    
+	<div class="container">
+		<div class="alert alert-danger" role="alert">
+  			<strong>Foutje</strong> Op regel 5, vlak bij positie 37 is iets mis.
+		</div>
+	</div>
+	
+<script src="/xsrc-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="/xsrc-noconflict/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	ace.require("ace/ext/language_tools");
+	var editor = ace.edit("editor");
+	editor.setTheme("ace/theme/profielspraak");
+	editor.getSession().setMode("ace/mode/profielspraak");
+	editor.setOptions({
+		enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+	});
+	editor.gotoLine(8);
+</script>
+
+{% endblock %}

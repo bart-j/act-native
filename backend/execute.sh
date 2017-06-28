@@ -12,4 +12,4 @@ export CLASSPATH=$CLASSPATH:/app/backend/lib/org.eclipse.jdt.core_3.11.0.v201408
 export CLASSPATH=$CLASSPATH:/app/backend/lib/mvel2-2.2.6.Final.jar
 export CLASSPATH=$CLASSPATH:/app/backend/lib/protobuf-java-2.5.0.jar
 
-java com.fokkenrood.antlr.Interpreteer "/app/backend/data/ProfielSpraak.txt" "$1" "$2"
+java com.fokkenrood.antlr.Interpreteer "FILE:/app/backend/data/ProfielSpraak.txt" "$1" "$2"

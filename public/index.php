@@ -12,6 +12,7 @@ $menu = [
     ["url" => "/", "title" => "Home"],
     ["url" => "/meer-info", "title" => "Meer info"],
     ["url" => "/over-ons", "title" => "Over ons"],
+	["url" => "/nieuw", "title" => "Nieuw"],
     ["url" => "/contact", "title" => "Contact"]
 ];
 
@@ -46,8 +47,9 @@ $app->post("/decide", function (Request $request, Response $response) {
     $description = escapeshellarg($input["description"]);
     $country = escapeshellarg($input["country"]);
 
-    exec("/app/backend/execute.sh $description $country", $result);
-
+    //exec("/app/backend/execute.sh $description $country", $result);
+    exec("C:\\xampp\\htdocs\\act-native\\backend\\execute.cmd $description $country", $result);
+    
     return $response->withJson([
         "result" => implode("<br />", array_slice($result, -3))
     ]);
@@ -59,6 +61,10 @@ $app->get("/meer-info", function (Request $request, Response $response) {
 
 $app->get("/over-ons", function (Request $request, Response $response) {
     return $this->view->render($response, "over-ons.html");
+});
+
+$app->get("/nieuw", function (Request $request, Response $response) {
+	return $this->view->render($response, "nieuw.html");
 });
 
 $app->get("/contact", function (Request $request, Response $response) {
