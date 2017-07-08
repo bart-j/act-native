@@ -20,7 +20,7 @@ $container = $app->getContainer();
 
 $container["view"] = function ($container) use ($menu) {
     $view = new \Slim\Views\Twig("../templates");
-    $basePath = rtrim(str_ireplace("index.php", "", $container["request"]->getUri()->getBasePath()), "/");
+    $basePath = rtrim(str_ireplace("home.php", "", $container["request"]->getUri()->getBasePath()), "/");
     $view->addExtension(new Slim\Views\TwigExtension($container["router"], $basePath));
     $view->getEnvironment()->addGlobal("current_path", $container["request"]->getUri()->getPath());
     $view->getEnvironment()->addGlobal("menu", $menu);
@@ -28,30 +28,36 @@ $container["view"] = function ($container) use ($menu) {
 };
 
 $app->get("/", function (Request $request, Response $response) {
-    return $this->view->render($response, "index.html", [
-        "rules" => file_get_contents("../backend/data/ProfielSpraak.txt")
-    ]);
+   return $this->view->render($response, "home.html", [
+       "rules" => file_get_contents("../backend/data/ProfielSpraak.txt")
+   ]);
 });
 
 $app->post("/decide", function (Request $request, Response $response) {
     $input = $request->getParsedBody();
     
-    $input["description"] = ucwords($input["description"]);
-    $input["description"] = str_replace("\"", "", $input["description"]);
-    $input["description"] = str_replace("'", "", $input["description"]);
+    $regelset = $input["regelset"];
+    $regelset = str_replace("\"", "\\\"", $regelset);
+    $regelset = str_replace("'", "\\\"", $regelset);
+    $regelset = '"' . $regelset . '"';
+    
+    $description = $input["description"];
+    $description = str_replace("\"", "", $description);
+    $description = str_replace("'", "", $description);
+    $description = ucwords($description);
+    $description = escapeshellarg($description);
+    
+    $country = $input["country"];
+    $country = str_replace("\"", "", $country);
+    $country = str_replace("'", "", $country);
+    $country = ucwords($country);
+    $country = escapeshellarg($country);
 
-    if (!in_array($input["country"], ["Taiwan", "China", "India", "Nederland"])) {
-        throw new Exception("Invalid input.");
-    }
-
-    $description = escapeshellarg($input["description"]);
-    $country = escapeshellarg($input["country"]);
-
-    //exec("/app/backend/execute.sh $description $country", $result);
-    exec("C:\\xampp\\htdocs\\act-native\\backend\\execute.cmd $description $country", $result);
+    //exec("/app/backend/execute.sh $regelset $description $country", $result);
+    exec("C:\\xampp\\htdocs\\act-native\\backend\\execute.cmd $regelset $description $country", $result);
     
     return $response->withJson([
-        "result" => implode("<br />", array_slice($result, -3))
+        "result" => implode("<br/>", array_slice($result, 0))
     ]);
 });
 

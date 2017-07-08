@@ -1,36 +1,94 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <div class="jumbotron">
-      <div class="container">
-        <h2>Een nieuwe regel bouwen</h2>
+<div class="jumbotron">
+  <div class="container">
+    <h2>Een nieuwe regel bouwen</h2>
+  </div>
+</div>
+    
+<div class="container">
+  <form id="example" method="POST">
+     <div class="row">
+      <div class="col-md-8">
+        <h5>Een regel heeft de volgende vorm:</h5>
+        <pre>
+1|  Regel &laquo;"<u>regelnaam</u>"&raquo; luidt:
+2|    Het (of De) &laquo;<u>variabele</u>&raquo; wordt gesteld op &laquo;<u>waarde</u>&raquo;
+3|    indien aan alle volgende voorwaarden wordt voldaan:
+4|      <b>- </b>&laquo;<u>variabele</u>&raquo; is gelijk aan &laquo;<u>waarde</u>"&raquo; &nbsp; (streepje)
+5|    <b>.</b> &nbsp; (punt)
+	    </pre>
+	    <p>De '<i>goederen omschrijving</i>' en het '<i>land van herkomst</i>' moeten in de voorwaarde staan
+	       en exact gelijk zijn aan de waarden in de invoervelden, om de regel te laten vuren.
+        </p>
+        <p>Met de toetscombinatie <b>[Ctrl]+[Spatie]</b>, krijg je hulp bij het intikken.
+           <br/><br/>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h5>Het objectmodel:</h5>
+        <pre>
+public class Aangifte <b>{</b>
+  //      input:
+  String  goederen_omschrijving   = null;
+  String  land_van_herkomst       = null;
+  int     factuurwaarde           = -1;
+  int     percentage_invoerrecht  = -1;
+  //      output:
+  int     bedrag_aan_invoerrecht  = -1;
+  String  certificaat             = null;
+  String  regel_naam              = null;
+<b>}</b>
+        </pre>
+      </div>
+    </div> 
+  
+    <div class="row-editor">
+      <div class="col">
+<div id="editor">/* ProfielSpraak */
+Regel "FOUTJE" luidt:
+
+Het percentage invoerrecht wordt gesteld op 50
+	en de factuurwaarde wordt gesteld op 1500
+	en het bedrag aan invoerrecht wordt gerekend als de factuurwaarde maal het percentage invoerrecht
+	en het certificaat wordt gesteld op "geen"
+	
+indien aan de volgende voorwaarden wordt voldaan:
+	- goederen omschrijving is gelijk aan "Fiets"
+	- land van herkomst is gelijk aan "Taiwan"
+	.
+</div>
       </div>
     </div>
-    
-    <div class="container">
-		<div id="editor">/* ProfielSpraak */
-		Regel "FOUTJE" luidt:
-		
-		Het percentage invoerrecht wordt gesteld op 50
-			en de factuurwaarde wordt gesteld op 1500
-			en het bedrag aan invoerrecht wordt gerekend als de factuurwaarde maal het percentage invoerrecht
-			en het certificaat wordt gesteld op "geen"
-			
-		indien aan de volgende voorwaarden wordt voldaan:
-			- goederen omschrijving is gelijk aan "Fiets"
-			- land van herkomst is gelijk aan "Taiwan"
-			.
-		</div>
+      
+    <div class="row">
+      <div class="col">
+        <div id="submit">
+          <button type="submit" class="btn btn-secondary" role="button"
+                  onclick="example.regelset.value = 'RULE:' + editor.getValue().replace(/\n/g,'##');">Interpreteer</button>
+        </div>        
+        <div id="spinner" style="display:none;"><img id="spinner" src="/img/spinner.gif" border=0></div>
+      </div>
     </div>
-    
-	<div class="container">
-		<div class="alert alert-danger" role="alert">
-  			<strong>Foutje</strong> Op regel 5, vlak bij positie 37 is iets mis.
-		</div>
-	</div>
-	
-<script src="/xsrc-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-<script src="/xsrc-noconflict/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+
+    <div class="row">
+      <div class="col">
+        <br/>
+        <div id="alertbox" class="alert alert-success" role="alert">
+          <strong>Resultaat:</strong> <div id="result"></div>
+        </div>
+      </div>
+    </div>
+  
+    <input type="hidden" id="regelset" name="regelset" value="RULE:">
+    <input type="hidden" id="description" name="description" value="Fiets">
+    <input type="hidden" id="country" name="country" value="Taiwan">
+  </form>
+</div>
+
+<script src="/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="/src-noconflict/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
 <script>
 	ace.require("ace/ext/language_tools");
 	var editor = ace.edit("editor");
@@ -41,7 +99,7 @@
         enableSnippets: true,
         enableLiveAutocompletion: true
 	});
-	editor.gotoLine(8);
+	editor.gotoLine(13);
 </script>
 
 {% endblock %}
